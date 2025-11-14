@@ -1,0 +1,8 @@
+.aws/credentials.ini
+.env
+
+.aws
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+.terraform
