@@ -41,79 +41,6 @@ This command will show you the installed Terraform version. Make sure it meets t
 
 ## Getting Started with Terraform Commands
 
-Once Terraform is installed and your configuration files are ready, you need to run two main commands to deploy your infrastructure.
-
-### 1. terraform init
-
-The first command you must run is `terraform init`. This command initializes your Terraform working directory.
-
-```bash
-terraform init
-```
-
-**What this command does:**
-
-- Downloads the required providers (like the AWS provider) specified in your `terraform.tf` file
-- Creates a `.terraform` directory that stores provider plugins
-- Initializes the backend for storing Terraform state
-- Prepares your working directory for other Terraform commands
-
-**When to use it:**
-
-- When you first start working with a Terraform project
-- After adding new providers to your configuration
-- After updating provider versions in `terraform.tf`
-- When you clone a Terraform project from a repository
-
-**Important**: You must run `terraform init` before running any other Terraform commands like `terraform plan` or `terraform apply`.
-
-### 2. terraform apply
-
-After running `terraform init`, you can use `terraform apply` to create or update your infrastructure.
-
-```bash
-terraform apply
-```
-
-**What this command does:**
-
-- Reads your Terraform configuration files (`main.tf`, `terraform.tf`, etc.)
-- Creates an execution plan showing what resources will be created, modified, or destroyed
-- Asks for your confirmation before making any changes
-- Creates, updates, or destroys AWS resources according to your configuration
-
-**What happens when you run it:**
-
-1. Terraform shows you a plan of all the changes it will make
-2. You review the plan to see what will be created (EC2 instance, RDS database, S3 bucket, etc.)
-3. You type `yes` to confirm and apply the changes, or `no` to cancel
-4. Terraform creates all the resources in AWS
-5. Terraform saves the state of your infrastructure in a `terraform.tfstate` file
-
-**Before running terraform apply, make sure:**
-
-- You have set up your variables file (`terraform.tfvars`) with:
-  - AWS access key and secret key
-  - Your IP addresses (`my_ip`, `other_ip`)
-  - Database username and password
-- You have AWS credentials with the necessary permissions
-- You have enough AWS account limits for the resources you're creating
-
-**Example workflow:**
-
-```bash
-# 1. Initialize Terraform (first time only, or after changes to providers)
-terraform init
-
-# 2. Review what will be created (optional, but recommended)
-terraform plan
-
-# 3. Apply the configuration to create resources
-terraform apply
-```
-
-**Note**: The `terraform plan` command (optional) shows you what changes will be made without actually applying them. This is useful for reviewing changes before applying them.
-
 ---
 
 ## Terraform Configuration
@@ -461,13 +388,75 @@ terraform fmt
 
 **Note**: This command only formats files and doesn't make any changes to your infrastructure. It's safe to run anytime.
 
-### About terraform init
+---
 
-The `terraform init` command can be confusing at first, especially if you're new to Terraform. Here are some important points to remember:
+### 1. terraform init
 
-- **You must run it first**: Before any other Terraform command (`plan`, `apply`, `destroy`), you need to run `terraform init`
-- **It downloads providers**: This command downloads the AWS provider (and other providers) that your configuration needs
-- **It's not destructive**: Running `terraform init` doesn't create or change any AWS resources - it only prepares your local environment
-- **Run it again when needed**: You should run it again if you add new providers or change provider versions in your `terraform.tf` file
+The first command you must run is `terraform init`. This command initializes your Terraform working directory.
 
-If you see errors about missing providers or plugins, running `terraform init` usually fixes them.
+```bash
+terraform init
+```
+
+**What this command does:**
+
+- Downloads the required providers (like the AWS provider) specified in your `terraform.tf` file
+- Creates a `.terraform` directory that stores provider plugins
+- Initializes the backend for storing Terraform state
+- Prepares your working directory for other Terraform commands
+
+**When to use it:**
+
+- When you first start working with a Terraform project
+- After adding new providers to your configuration
+- After updating provider versions in `terraform.tf`
+- When you clone a Terraform project from a repository
+
+**Important**: You must run `terraform init` before running any other Terraform commands like `terraform plan` or `terraform apply`.
+
+### 2. terraform apply
+
+After running `terraform init`, you can use `terraform apply` to create or update your infrastructure.
+
+```bash
+terraform apply
+```
+
+**What this command does:**
+
+- Reads your Terraform configuration files (`main.tf`, `terraform.tf`, etc.)
+- Creates an execution plan showing what resources will be created, modified, or destroyed
+- Asks for your confirmation before making any changes
+- Creates, updates, or destroys AWS resources according to your configuration
+
+**What happens when you run it:**
+
+1. Terraform shows you a plan of all the changes it will make
+2. You review the plan to see what will be created (EC2 instance, RDS database, S3 bucket, etc.)
+3. You type `yes` to confirm and apply the changes, or `no` to cancel
+4. Terraform creates all the resources in AWS
+5. Terraform saves the state of your infrastructure in a `terraform.tfstate` file
+
+**Before running terraform apply, make sure:**
+
+- You have set up your variables file (`terraform.tfvars`) with:
+  - AWS access key and secret key
+  - Your IP addresses (`my_ip`, `other_ip`)
+  - Database username and password
+- You have AWS credentials with the necessary permissions
+- You have enough AWS account limits for the resources you're creating
+
+**Example workflow:**
+
+```bash
+# 1. Initialize Terraform (first time only, or after changes to providers)
+terraform init
+
+# 2. Review what will be created (optional, but recommended)
+terraform plan
+
+# 3. Apply the configuration to create resources
+terraform apply
+```
+
+**Note**: The `terraform plan` command (optional) shows you what changes will be made without actually applying them. This is useful for reviewing changes before applying them.
