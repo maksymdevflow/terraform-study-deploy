@@ -432,4 +432,42 @@ This Terraform configuration creates:
 4. An S3 bucket for storing files and data
 5. All resources are created in the default VPC in the specified AWS region
 
-Remember to set up AWS credentials, IP addresses, and database credentials before running `terraform apply`.
+Remember to set up your variables file (`variables.tf` and `terraform.tfvars`) with your AWS credentials, IP addresses, and database credentials before running `terraform apply`.
+
+---
+
+## Tips and Additional Commands
+
+### terraform fmt
+
+Before committing your Terraform code, it's a good practice to format it. The `terraform fmt` command automatically formats your Terraform configuration files to a consistent style.
+
+```bash
+terraform fmt
+```
+
+**What this command does:**
+
+- Formats all `.tf` files in the current directory
+- Makes your code more readable and consistent
+- Follows Terraform's standard formatting conventions
+- Can be run on specific files: `terraform fmt main.tf`
+
+**When to use it:**
+
+- Before committing code to version control
+- After making changes to your Terraform files
+- To ensure consistent code style across your project
+
+**Note**: This command only formats files and doesn't make any changes to your infrastructure. It's safe to run anytime.
+
+### About terraform init
+
+The `terraform init` command can be confusing at first, especially if you're new to Terraform. Here are some important points to remember:
+
+- **You must run it first**: Before any other Terraform command (`plan`, `apply`, `destroy`), you need to run `terraform init`
+- **It downloads providers**: This command downloads the AWS provider (and other providers) that your configuration needs
+- **It's not destructive**: Running `terraform init` doesn't create or change any AWS resources - it only prepares your local environment
+- **Run it again when needed**: You should run it again if you add new providers or change provider versions in your `terraform.tf` file
+
+If you see errors about missing providers or plugins, running `terraform init` usually fixes them.
