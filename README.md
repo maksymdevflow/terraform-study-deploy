@@ -1,6 +1,6 @@
 # Terraform AWS Infrastructure Guide
 
-This guide explains how to set up AWS infrastructure using Terraform. We use variables to keep sensitive information like access keys and passwords secure.
+This guide is a collection of notes and explanations from my Terraform learning journey. It explains how to set up AWS infrastructure using Terraform, and I hope it might be useful for others who are learning Terraform as well. We use variables to keep sensitive information like access keys and passwords secure.
 
 ## Table of Contents
 
@@ -161,7 +161,7 @@ This block initializes the connection to AWS. Here we configure:
 - **region**: The AWS region where all resources will be created (e.g., `us-east-1`). This region will be used for all services like S3, RDS, and EC2.
 - **access_key** and **secret_key**: Your AWS credentials stored in variables for security.
 
-**Note**: You can create IAM users manually, but it's better to create them with Terraform. This way, you can manage permissions more easily and avoid adding permissions one by one. For more information on creating IAM users with Terraform, see the [official Terraform AWS IAM User documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user).
+**Note**: You can create IAM users manually, but it's better to create them with Terraform. This way, you can manage permissions more easily. I spent a lot of time manually adding permissions one by one 😅. For more information on creating IAM users with Terraform, see the [official Terraform AWS IAM User documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user).
 
 ---
 
@@ -432,4 +432,4 @@ This Terraform configuration creates:
 4. An S3 bucket for storing files and data
 5. All resources are created in the default VPC in the specified AWS region
 
-Remember to set up your variables file (`variables.tf` and `terraform.tfvars`) with your AWS credentials, IP addresses, and database credentials before running `terraform apply`.
+Remember to set up AWS credentials, IP addresses, and database credentials before running `terraform apply`.
